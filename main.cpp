@@ -26,14 +26,22 @@ int main()
         if(cmd=="ADD_USER")
         {
             if(username1=="") cout<<"Please Enter Username!"<<'\n';
-            else g.add_user(username1);
+            else 
+            {
+                g.add_user(username1);
+                cout<<"User Added!";
+            }
         }
 
         else if(cmd=="ADD_FRIEND")
         {
             if(username1=="") cout<<"Please Enter Username!"<<'\n';
             else if(username2=="") cout<<"Please Enter Friend's Username!"<<'\n';
-            else g.add_friend(username1,username2);
+            else 
+            {
+                g.add_friend(username1,username2);
+                cout<<username1<<" and "<<username2<<" are now friends!";
+            }
         }
 
         else if(cmd == "LIST_FRIENDS")
@@ -45,7 +53,7 @@ int main()
         else if(cmd == "SUGGEST_FRIENDS")
         {
             if(username1=="") cout<<"Please Enter Username!"<<'\n';
-            else if(username2=="") cout<<"Please Enter Number of Suggested Friends!"<<'\n';
+            else if(username2=="") cout<<"Please Enter Number of Friends to be Suggested!"<<'\n';
             else g.suggest_friends(username1,stoi(username2));
         }
  
@@ -60,7 +68,11 @@ int main()
         {
             if(username1=="") cout<<"Please Enter Username!"<<'\n';
             else if(username2=="") cout<<"Please Enter Post Content!"<<'\n';
-            else g.add_post(username1,username2);
+            else 
+            {
+                g.add_post(username1,username2);
+                cout<<"Post Added!";
+            }
         }
         else if(cmd == "OUTPUT_POSTS")
         {
