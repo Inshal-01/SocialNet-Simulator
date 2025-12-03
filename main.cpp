@@ -29,18 +29,19 @@ int main()
             else 
             {
                 g.add_user(username1);
-                cout<<"User Added!";
+                
             }
         }
 
         else if(cmd=="ADD_FRIEND")
         {
+            while (!username2.empty() && isspace(username2.back())) username2.pop_back();
             if(username1=="") cout<<"Please Enter Username!"<<'\n';
             else if(username2=="") cout<<"Please Enter Friend's Username!"<<'\n';
             else 
             {
                 g.add_friend(username1,username2);
-                cout<<username1<<" and "<<username2<<" are now friends!";
+                
             }
         }
 
@@ -57,8 +58,9 @@ int main()
             else g.suggest_friends(username1,stoi(username2));
         }
  
-        else if(cmd == "DEGREE_OF_SEPARATION")
+        else if(cmd == "DEGREES_OF_SEPARATION")
         {
+             while (!username2.empty() && isspace(username2.back())) username2.pop_back();
             if(username1=="") cout<<"Please Enter Username!"<<'\n';
             else if(username2=="") cout<<"Please Enter Friend's Username!"<<'\n';   
             else g.degree_of_separation(username1,username2);
@@ -71,7 +73,6 @@ int main()
             else 
             {
                 g.add_post(username1,username2);
-                cout<<"Post Added!";
             }
         }
         else if(cmd == "OUTPUT_POSTS")

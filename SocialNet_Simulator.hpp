@@ -25,9 +25,17 @@ class Graph
     void add_user(string username)
     {
         username = to_lower(username);
+
+        if(hashmap.find(username)!=hashmap.end())
+        {
+            cout<<"User Already Exists!\n";
+            return;
+        }
         User* user = new User(username);
     
         hashmap[username] = user;
+        cout<<"User Added!\n";
+        return;
     }
 
     void add_friend(string u1,string u2)
@@ -42,8 +50,14 @@ class Graph
         }
         User* n1 = hashmap[u1];
         User* n2 = hashmap[u2];
+        if(n1->friends.find(n2)!=n1->friends.end())
+        {
+            cout<<n1->username<<" and "<<n2->username<<" are already friends!\n";
+            return;
+        }
         n1->friends.insert(n2);
         n2->friends.insert(n1);
+        cout<<u1<<" and "<<u2<<" are now friends!\n";
         return;
     }
 
@@ -81,6 +95,11 @@ class Graph
 
     void suggest_friends(string username,int n)
     {
+        if(n<0)
+        {
+            cout<<"Please Enter a Valid Number!\n";
+            return;
+        }
         if(n==0) return ;
         username = to_lower(username);
 
@@ -103,7 +122,11 @@ class Graph
             }
         }
 
-
+        if(count.empty())
+        {
+            cout<<"No Available Suggestions!\n";
+            return;
+        }
         vector<pair<User*,int>> v;
 
         for(auto it : count)
@@ -208,17 +231,24 @@ class Graph
         {
             user->root = new Node(post,time(NULL));
             user->number_of_posts++;
+            cout<<"Post Added!\n";
             return;
         }
 
         user->root = user->root->insert(user->root,post,time(NULL));
         user->number_of_posts++;
+        cout<<"Post Added!\n";
         return;
     }
 
 
     void output_posts(string username,int n)
     {
+        if(n!=-1 and n < 0)
+        {
+            cout<<"Please Enter a Valid Number!\n";
+            return;
+        }
         username = to_lower(username);
 
         if(hashmap.find(username) == hashmap.end())
@@ -227,6 +257,12 @@ class Graph
             return;
         }
         User* user = hashmap[username];
+
+        if(user->number_of_posts==0)
+        {
+            cout<<"No posts!\n";
+            return;
+        }
         if(n==-1 or n>=user->number_of_posts)
         {
             user->root->reverse_inorder(user->root);
